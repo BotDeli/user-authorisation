@@ -8,7 +8,7 @@ import (
 	"user-authorization/storage/authorization"
 )
 
-func StartGRPC(cfg config.GRPCConfig) error {
+func StartGRPC(cfg *config.GRPCConfig) error {
 	router := grpc.NewServer(grpc.EmptyServerOption{})
 	registerAuthorization(router)
 	return startListener(router, cfg)
@@ -19,7 +19,7 @@ func registerAuthorization(router *grpc.Server) {
 	pb.RegisterAuthorizationServer(router, display)
 }
 
-func startListener(router *grpc.Server, cfg config.GRPCConfig) error {
+func startListener(router *grpc.Server, cfg *config.GRPCConfig) error {
 	l, err := net.Listen(cfg.Network, cfg.Address)
 	if err != nil {
 		return err
