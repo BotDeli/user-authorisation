@@ -1,0 +1,27 @@
+syntax = "proto3";
+option go_package=".";
+
+service Authorization {
+  rpc Register(User) returns(SessionResponse) {}
+  rpc LogIn(User) returns(SessionResponse) {}
+  rpc IsAuthenticated(SessionRequest) returns(AuthenticatedSession) {}
+}
+
+message User {
+  string login = 1;
+  string password = 2;
+}
+
+message SessionResponse {
+  string key = 1;
+  string error = 2;
+}
+
+message SessionRequest {
+  string key = 1;
+}
+
+message AuthenticatedSession {
+  bool authenticated = 1;
+  string login = 2;
+}
