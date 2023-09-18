@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.31.0
 // 	protoc        v4.24.3
-// source: authorization.pb
+// source: authorizationMock.pb
 
 package pb
 

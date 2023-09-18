@@ -8,5 +8,6 @@ import (
 
 func StartApp() {
 	cfg := config.MustReadConfig()
-	log.Fatal(GRPC.StartGRPC(cfg.Grpc))
+	service := GRPC.MustInitService()
+	log.Fatal(GRPC.StartGRPC(cfg.Grpc, service))
 }

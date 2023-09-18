@@ -5,18 +5,12 @@ import (
 	"net"
 	"user-authorization/internal/config"
 	"user-authorization/internal/server/GRPC/pb"
-	"user-authorization/storage/authorization"
 )
 
-func StartGRPC(cfg *config.GRPCConfig) error {
+func StartGRPC(cfg *config.GRPCConfig, service pb.AuthorizationServer) error {
 	router := grpc.NewServer(grpc.EmptyServerOption{})
-	registerAuthorization(router)
+	pb.RegisterAuthorizationServer(router, service)
 	return startListener(router, cfg)
-}
-
-func registerAuthorization(router *grpc.Server) {
-	display := authorization.InitDisplay()
-	pb.RegisterAuthorizationServer(router, display)
 }
 
 func startListener(router *grpc.Server, cfg *config.GRPCConfig) error {

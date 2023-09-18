@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-GRPC v1.3.0
 // - protoc             v4.24.3
-// source: authorization.pb
+// source: authorizationMock.pb
 
 package pb
 
@@ -177,5 +177,5 @@ var Authorization_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "authorization.pb",
+	Metadata: "authorizationMock.pb",
 }
