@@ -3,19 +3,20 @@ package user
 import (
 	"database/sql"
 	"errors"
+	"fmt"
 	_ "github.com/lib/pq"
 	"user-authorization/internal/config"
 	"user-authorization/pkg/errorHandle"
 	"user-authorization/pkg/hasher"
 )
 
-var (
-	errInvalidPassword = errors.New("неверный пароль")
-)
-
 type Postgres struct {
 	DB *sql.DB
 }
+
+var (
+	errDontCorrectLoginOrPassword = errors.New("некорректный логин или пароль")
+)
 
 func initPostgres(cfg *config.PostgresConfig) (*Postgres, error) {
 	db, err := sql.Open("postgres", cfg.GetSourceName())
@@ -39,7 +40,7 @@ func (pg *Postgres) NewUser(login, password string) error {
 }
 
 func (pg *Postgres) IsUser(login string) bool {
-	query := `SELECT COUNT(*) FROM users WHERE login = $1`
+	query := `SELECT password FROM users WHERE login = $1`
 	rows, err := pg.DB.Query(query, login)
 	return err == nil && rows.Next()
 }
@@ -54,13 +55,15 @@ func (pg *Postgres) AuthenticationUser(login, password string) error {
 	var savedHash string
 	rows.Next()
 	err = rows.Scan(&savedHash)
+	fmt.Println(savedHash)
 	if err != nil {
 		return err
 	}
 
 	hash := hasher.Hashing(password)
+	fmt.Println(hash)
 	if savedHash != hash {
-		return errInvalidPassword
+		return errDontCorrectLoginOrPassword
 	}
 
 	return nil
@@ -70,7 +73,8 @@ func (pg *Postgres) ChangePassword(login, password, newPassword string) error {
 	if err := pg.AuthenticationUser(login, password); err != nil {
 		return err
 	}
+	hash := hasher.Hashing(newPassword)
 	query := `UPDATE users SET password = $1 WHERE login = $2`
-	_, err := pg.DB.Exec(query, newPassword, login)
+	_, err := pg.DB.Exec(query, hash, login)
 	return err
 }

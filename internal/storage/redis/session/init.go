@@ -8,7 +8,7 @@ import (
 type Display interface {
 	NewSession(login string) (string, error)
 	GetLoginFromSession(session string) (string, error)
-	UpdateSessionLifeTime(login string)
+	UpdateSessionLifeTime(key string)
 	Close()
 }
 

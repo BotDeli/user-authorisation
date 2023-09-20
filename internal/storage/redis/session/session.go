@@ -2,12 +2,22 @@ package session
 
 import (
 	"github.com/go-redis/redis"
+	"time"
 	"user-authorization/internal/config"
+	"user-authorization/pkg/UUIDGenerator"
 	"user-authorization/pkg/errorHandle"
 )
 
+type redisClient interface {
+	Close() error
+	Set(key string, value interface{}, expiration time.Duration) *redis.StatusCmd
+	Get(key string) *redis.StringCmd
+	Expire(key string, expiration time.Duration) *redis.BoolCmd
+}
+
 type Redis struct {
-	Client *redis.Client
+	Client   redisClient
+	Lifetime time.Duration
 }
 
 const path = "internal/storage/redis/session"
@@ -19,7 +29,7 @@ func initRedis(cfg *config.RedisConfig) *Redis {
 		Password: cfg.Password,
 		DB:       cfg.DB,
 	})
-	return &Redis{Client: client}
+	return &Redis{Client: client, Lifetime: cfg.LifetimeWrite}
 }
 
 func (r *Redis) Close() {
@@ -29,12 +39,16 @@ func (r *Redis) Close() {
 }
 
 func (r *Redis) NewSession(login string) (string, error) {
-	return "", nil
+	key := UUIDGenerator.NewUUID()
+	cmd := r.Client.Set(key, login, r.Lifetime)
+	return key, cmd.Err()
 }
 
-func (r *Redis) GetLoginFromSession(session string) (string, error) {
-	return "", nil
+func (r *Redis) GetLoginFromSession(key string) (string, error) {
+	cmd := r.Client.Get(key)
+	return cmd.Result()
 }
 
-func (r *Redis) UpdateSessionLifeTime(login string) {
+func (r *Redis) UpdateSessionLifeTime(key string) {
+	r.Client.Expire(key, r.Lifetime)
 }

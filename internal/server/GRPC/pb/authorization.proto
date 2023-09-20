@@ -18,8 +18,7 @@ message SessionData {
 }
 
 message AuthenticatedSession {
-  bool authenticated = 1;
-  string login = 2;
+  string login = 1;
 }
 
 message ChangePasswordData {
