@@ -8,3 +8,9 @@ type GRPCConfig struct {
 	Network string `yaml:"network" env-default:"tcp"`
 	Address string `yaml:"address" env-required:"true"`
 }
+
+type PostgresConfig struct {
+}
+
+type RedisConfig struct {
+}

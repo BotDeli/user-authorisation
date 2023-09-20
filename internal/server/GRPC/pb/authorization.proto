@@ -2,9 +2,10 @@ syntax = "proto3";
 option go_package=".";
 
 service Authorization {
-  rpc Register(User) returns(SessionResponse) {}
-  rpc LogIn(User) returns(SessionResponse) {}
-  rpc IsAuthenticated(SessionRequest) returns(AuthenticatedSession) {}
+  rpc Register(User) returns(SessionData) {}
+  rpc LogIn(User) returns(SessionData) {}
+  rpc IsAuthenticated(SessionData) returns(AuthenticatedSession) {}
+  rpc ChangePassword(ChangePasswordData) returns(Null) {}
 }
 
 message User {
@@ -12,16 +13,21 @@ message User {
   string password = 2;
 }
 
-message SessionResponse {
-  string key = 1;
-  string error = 2;
-}
-
-message SessionRequest {
+message SessionData {
   string key = 1;
 }
 
 message AuthenticatedSession {
   bool authenticated = 1;
   string login = 2;
+}
+
+message ChangePasswordData {
+  string login = 1;
+  string password = 2;
+  string newPassword = 3;
+}
+
+message Null{
+
 }

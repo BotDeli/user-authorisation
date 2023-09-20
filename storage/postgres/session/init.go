@@ -1,8 +1,10 @@
 package session
 
+//go:generate go run github.com/vektra/mockery/v2@v2.32.0 --name=Display
 type Display interface {
-	GetSession(login string) string
-	IsSession(login string) bool
+	NewSession(login string) (string, error)
+	GetLoginFromSession(session string) (string, error)
+	UpdateSessionLifeTime(login string)
 }
 
 //type Postgres struct {

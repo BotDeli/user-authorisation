@@ -1,13 +1,18 @@
 package app
 
 import (
-	"log"
 	"user-authorization/internal/config"
 	"user-authorization/internal/server/GRPC"
+	"user-authorization/pkg/errorHandle"
 )
 
 func StartApp() {
 	cfg := config.MustReadConfig()
-	service := GRPC.MustInitService()
-	log.Fatal(GRPC.StartGRPC(cfg.Grpc, service))
+	service := GRPC.InitService()
+	errorHandle.Fatal(
+		"internal/app",
+		"app.go",
+		"StartApp",
+		GRPC.StartGRPC(cfg.Grpc, service),
+	)
 }
