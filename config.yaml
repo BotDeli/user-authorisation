@@ -1,3 +1,14 @@
 grpc:
   network: "tcp"
   address: ":50053"
+postgres:
+  user: "kare"
+  password: ""
+  host: "localhost"
+  dbname: "Authorization"
+  sslmode: "disable"
+redis:
+  network: "tcp"
+  address: "localhost:6379"
+  password: ""
+  db: "0"

@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 	"user-authorization/internal/server/GRPC/pb"
-	"user-authorization/storage/postgres/session"
-	"user-authorization/storage/postgres/user"
+	"user-authorization/internal/storage/postgres/user"
+	"user-authorization/internal/storage/redis/session"
 )
 
 type Authorization struct {
