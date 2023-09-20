@@ -9,6 +9,11 @@ type Display struct {
 	mock.Mock
 }
 
+// Close provides a mock function with given fields:
+func (_m *Display) Close() {
+	_m.Called()
+}
+
 // GetLoginFromSession provides a mock function with given fields: _a0
 func (_m *Display) GetLoginFromSession(_a0 string) (string, error) {
 	ret := _m.Called(_a0)

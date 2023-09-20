@@ -37,6 +37,11 @@ func (_m *Display) ChangePassword(login string, password string, newPassword str
 	return r0
 }
 
+// Close provides a mock function with given fields:
+func (_m *Display) Close() {
+	_m.Called()
+}
+
 // IsUser provides a mock function with given fields: login
 func (_m *Display) IsUser(login string) bool {
 	ret := _m.Called(login)
