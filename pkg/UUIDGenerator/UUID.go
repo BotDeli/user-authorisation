@@ -5,13 +5,21 @@ import (
 	"time"
 )
 
+const pattern = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+const lengthUUID = 16
+
 func NewUUID() string {
-	pattern := "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-	random := rand.New(rand.NewSource(time.Now().UnixNano()))
+	random := newRandom()
 	limit := len(pattern)
-	var UUID string
-	for i := 0; i < 16; i++ {
-		UUID += string(pattern[random.Intn(limit)])
+
+	UUID := make([]byte, lengthUUID)
+
+	for i := 0; i < lengthUUID; i++ {
+		UUID[i] = pattern[random.Intn(limit)]
 	}
-	return UUID
+	return string(UUID)
+}
+
+func newRandom() *rand.Rand {
+	return rand.New(rand.NewSource(time.Now().UnixNano()))
 }

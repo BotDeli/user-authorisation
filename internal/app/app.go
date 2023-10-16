@@ -13,6 +13,7 @@ func StartApp() {
 
 	userDisplay := user.MustInitUserDisplay(cfg.Postgres)
 	defer userDisplay.Close()
+
 	sessionDisplay := session.MustInitSessionDisplay(cfg.Redis)
 	defer sessionDisplay.Close()
 

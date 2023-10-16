@@ -195,7 +195,7 @@ func TestErrorExecChangePassword(t *testing.T) {
 		mock.ExpectQuery(`SELECT`).WithArgs(login).WillReturnRows(rows).WillReturnError(nil)
 
 		// change
-		mock.ExpectExec(`UPDATE`).WithArgs(newPassword, login).WillReturnError(testError)
+		mock.ExpectExec(`UPDATE`).WithArgs(login, newPassword).WillReturnError(testError)
 	}
 
 	testMocks := func(t *testing.T, pg user.Postgres) {
@@ -216,7 +216,7 @@ func TestSuccessfulChangePassword(t *testing.T) {
 		mock.ExpectQuery(`SELECT`).WithArgs(login).WillReturnRows(rows).WillReturnError(nil)
 
 		// change
-		mock.ExpectExec(`UPDATE`).WithArgs(newPassword, login).WillReturnResult(emptyResult).WillReturnError(nil)
+		mock.ExpectExec(`UPDATE`).WithArgs(login, hasher.Hashing(newPassword)).WillReturnResult(emptyResult).WillReturnError(nil)
 	}
 
 	testMocks := func(t *testing.T, pg user.Postgres) {

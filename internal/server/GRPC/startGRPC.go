@@ -18,5 +18,6 @@ func startListener(router *grpc.Server, cfg *config.GRPCConfig) error {
 	if err != nil {
 		return err
 	}
+
 	return router.Serve(l)
 }

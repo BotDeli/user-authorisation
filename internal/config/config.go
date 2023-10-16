@@ -19,7 +19,7 @@ type GRPCConfig struct {
 type PostgresConfig struct {
 	User     string `yaml:"user" env-required:"true"`
 	Password string `yaml:"password"`
-	Host     string `yaml:"host" env-required:"true"`
+	Address  string `yaml:"address" env-required:"true"`
 	Dbname   string `yaml:"dbname" env-required:"true"`
 	Sslmode  string `yaml:"sslmode" env-default:"false"`
 }
@@ -29,7 +29,7 @@ func (cfg *PostgresConfig) GetSourceName() string {
 		"postgres://%s:%s@%s/%s?sslmode=%s",
 		cfg.User,
 		cfg.Password,
-		cfg.Host,
+		cfg.Address,
 		cfg.Dbname,
 		cfg.Sslmode,
 	)

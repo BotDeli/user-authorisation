@@ -20,16 +20,18 @@ type Redis struct {
 	Lifetime time.Duration
 }
 
-const path = "internal/storage/redis/session"
+func initRedis(cfg *config.RedisConfig) (*Redis, error) {
+	client := getNewClient(cfg)
+	return &Redis{Client: client, Lifetime: cfg.LifetimeWrite}, client.Ping().Err()
+}
 
-func initRedis(cfg *config.RedisConfig) *Redis {
-	client := redis.NewClient(&redis.Options{
+func getNewClient(cfg *config.RedisConfig) *redis.Client {
+	return redis.NewClient(&redis.Options{
 		Network:  cfg.Network,
 		Addr:     cfg.Address,
 		Password: cfg.Password,
 		DB:       cfg.DB,
 	})
-	return &Redis{Client: client, Lifetime: cfg.LifetimeWrite}
 }
 
 func (r *Redis) Close() {

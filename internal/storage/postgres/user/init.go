@@ -21,5 +21,6 @@ func MustInitUserDisplay(cfg *config.PostgresConfig) Display {
 	if err != nil {
 		errorHandle.Fatal(path, "init.go", "MustInitUserDisplay", err)
 	}
+
 	return pg
 }

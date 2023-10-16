@@ -2,14 +2,14 @@ grpc:
   network: "tcp"
   address: ":50053"
 postgres:
-  user: "kare"
-  password: ""
-  host: "localhost"
-  dbname: "Authorization"
+  user: "postgres"
+  password: "postgres"
+  address: "storage_postgres:5432"
+  dbname: "postgres"
   sslmode: "disable"
 redis:
   network: "tcp"
-  address: "localhost:6379"
+  address: "storage_redis:6379"
   password: ""
   db: 0
   lifetimeWrite: "24h"

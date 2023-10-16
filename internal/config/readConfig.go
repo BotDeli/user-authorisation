@@ -14,8 +14,10 @@ const (
 
 func MustReadConfig() Config {
 	path := os.Getenv("ConfigPath")
+
 	checkPathIsSet(path)
 	checkFileExists(path)
+
 	cfg := readConfig(path)
 	return cfg
 }
@@ -39,5 +41,6 @@ func readConfig(path string) Config {
 		log.Println(errorReading)
 		log.Fatal(err)
 	}
+
 	return cfg
 }

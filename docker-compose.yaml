@@ -1,0 +1,30 @@
+services:
+  app:
+    build: .
+    ports:
+      - 50053:50053
+    environment:
+      - ConfigPath=config.yaml
+    networks:
+      - authorization_network
+
+  storage_postgres:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    networks:
+      - authorization_network
+
+  storage_redis:
+    image: redis
+    ports:
+      - 6379:6379
+    networks:
+      - authorization_network
+
+networks:
+  authorization_network:
