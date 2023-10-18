@@ -1,0 +1,41 @@
+syntax = "proto3";
+option go_package=".";
+
+service AccountControl {
+  rpc RegistrationAccount(User) returns(SessionData) {}
+  rpc AuthorizationAccount(User) returns(SessionData) {}
+
+  rpc ChangePasswordAccount(ChangePasswordData) returns(Null) {}
+  rpc DeleteAccount(FullInfoUser) returns(Null) {}
+
+  rpc IsAuthorizedSessionData(SessionData) returns(AccountID) {}
+  rpc DeleteSessionData(SessionData) returns(Null) {}
+}
+
+message User {
+  string email = 1;
+  string password = 2;
+}
+
+message SessionData {
+  string id = 1;
+  string key = 2;
+}
+
+message ChangePasswordData {
+  string email = 1;
+  string password = 2;
+  string newPassword = 3;
+}
+
+message FullInfoUser {
+  string id = 1;
+  string email = 2;
+  string password = 3;
+}
+
+message AccountID {
+  string id = 1;
+}
+
+message Null {}
