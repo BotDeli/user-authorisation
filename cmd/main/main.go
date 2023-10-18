@@ -1,6 +1,6 @@
 package main
 
-import "user-authorization/internal/app"
+import "AccountControl/internal/app"
 
 func main() {
 	app.StartApp()

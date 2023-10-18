@@ -2,8 +2,8 @@ grpc:
   network: "tcp"
   address: ":50053"
 postgres:
-  user: "postgres"
-  password: "postgres"
+  user: "kare"
+  password: "pass"
   address: "storage_postgres:5432"
   dbname: "postgres"
   sslmode: "disable"

@@ -33,6 +33,7 @@ func (cfg *PostgresConfig) GetSourceName() string {
 		cfg.Dbname,
 		cfg.Sslmode,
 	)
+	//return "host=127.0.0.1 port=5432 user=kare dbname=postgres sslmode=require"
 }
 
 type RedisConfig struct {

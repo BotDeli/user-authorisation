@@ -1,11 +1,11 @@
 package session
 
 import (
+	"AccountControl/internal/config"
+	"AccountControl/pkg/errorHandle"
+	"AccountControl/pkg/generator"
 	"github.com/go-redis/redis"
 	"time"
-	"user-authorization/internal/config"
-	"user-authorization/pkg/UUIDGenerator"
-	"user-authorization/pkg/errorHandle"
 )
 
 type redisClient interface {
@@ -13,6 +13,7 @@ type redisClient interface {
 	Set(key string, value interface{}, expiration time.Duration) *redis.StatusCmd
 	Get(key string) *redis.StringCmd
 	Expire(key string, expiration time.Duration) *redis.BoolCmd
+	Del(keys ...string) *redis.IntCmd
 }
 
 type Redis struct {
@@ -40,17 +41,21 @@ func (r *Redis) Close() {
 	}
 }
 
-func (r *Redis) NewSession(login string) (string, error) {
-	key := UUIDGenerator.NewUUID()
-	cmd := r.Client.Set(key, login, r.Lifetime)
+func (r *Redis) NewSession(id string) (string, error) {
+	key := generator.NewUUIDDigitsLetters()
+	cmd := r.Client.Set(key, id, r.Lifetime)
 	return key, cmd.Err()
 }
 
-func (r *Redis) GetLoginFromSession(key string) (string, error) {
+func (r *Redis) GetIdFromSession(key string) (string, error) {
 	cmd := r.Client.Get(key)
 	return cmd.Result()
 }
 
 func (r *Redis) UpdateSessionLifeTime(key string) {
 	r.Client.Expire(key, r.Lifetime)
+}
+
+func (r *Redis) DeleteSession(key string) {
+	r.Client.Del(key)
 }

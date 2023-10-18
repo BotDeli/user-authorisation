@@ -1,11 +1,11 @@
 package tests
 
 import (
+	"AccountControl/internal/storage/redis/session"
 	"github.com/go-redis/redis"
 	"github.com/stretchr/testify/mock"
 	"testing"
 	"time"
-	"user-authorization/internal/storage/redis/session"
 )
 
 const lifetime = 1 * time.Second
@@ -33,14 +33,19 @@ func (m *RedisMock) Expire(key string, expiration time.Duration) *redis.BoolCmd 
 	return args.Get(0).(*redis.BoolCmd)
 }
 
+func (m *RedisMock) Del(keys ...string) *redis.IntCmd {
+	args := m.Called(keys)
+	return args.Get(0).(*redis.IntCmd)
+}
+
 func TestErrorNewSession(t *testing.T) {
 	initMocks := func(client *RedisMock) {
 		cmd := redis.NewStatusResult("", testError)
-		client.On("Set", mock.Anything, login, lifetime).Return(cmd)
+		client.On("Set", mock.Anything, testID, lifetime).Return(cmd)
 	}
 
 	testMocks := func(t *testing.T, r session.Redis) {
-		_, err := r.NewSession(login)
+		_, err := r.NewSession(testID)
 		if err == nil {
 			t.Error("expected error, got nil")
 		}
@@ -59,11 +64,11 @@ func testRedisMock(t *testing.T, initMocks func(*RedisMock), testMocks func(*tes
 func TestSuccessfulNewSession(t *testing.T) {
 	initMocks := func(client *RedisMock) {
 		cmd := redis.NewStatusResult("", nil)
-		client.On("Set", mock.Anything, login, lifetime).Return(cmd)
+		client.On("Set", mock.Anything, testID, lifetime).Return(cmd)
 	}
 
 	testMocks := func(t *testing.T, r session.Redis) {
-		_, err := r.NewSession(login)
+		_, err := r.NewSession(testID)
 		if err != nil {
 			t.Error(err)
 		}
@@ -72,14 +77,14 @@ func TestSuccessfulNewSession(t *testing.T) {
 	testRedisMock(t, initMocks, testMocks)
 }
 
-func TestErrorGetLoginFromSession(t *testing.T) {
+func TestErrorGetEmailFromSession(t *testing.T) {
 	initMocks := func(client *RedisMock) {
 		cmd := redis.NewStringResult("", testError)
 		client.On("Get", testKey).Return(cmd)
 	}
 
 	testMocks := func(t *testing.T, r session.Redis) {
-		_, err := r.GetLoginFromSession(testKey)
+		_, err := r.GetIdFromSession(testKey)
 		if err == nil {
 			t.Error("expected error, got nil")
 		}
@@ -88,19 +93,19 @@ func TestErrorGetLoginFromSession(t *testing.T) {
 	testRedisMock(t, initMocks, testMocks)
 }
 
-func TestSuccessfulGetLoginFromSession(t *testing.T) {
+func TestSuccessfulGetEmailFromSession(t *testing.T) {
 	initMocks := func(client *RedisMock) {
-		cmd := redis.NewStringResult(login, nil)
+		cmd := redis.NewStringResult(testID, nil)
 		client.On("Get", testKey).Return(cmd)
 	}
 
 	testMocks := func(t *testing.T, r session.Redis) {
-		loginR, err := r.GetLoginFromSession(testKey)
+		id, err := r.GetIdFromSession(testKey)
 		if err != nil {
 			t.Error(err)
 		}
-		if loginR != login {
-			t.Errorf("expected %s, got %s", loginR, login)
+		if id != testID {
+			t.Errorf("expected %s, got %s", testID, id)
 		}
 	}
 

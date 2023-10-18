@@ -14,8 +14,13 @@ func (_m *Display) Close() {
 	_m.Called()
 }
 
-// GetLoginFromSession provides a mock function with given fields: _a0
-func (_m *Display) GetLoginFromSession(_a0 string) (string, error) {
+// DeleteSession provides a mock function with given fields: key
+func (_m *Display) DeleteSession(key string) {
+	_m.Called(key)
+}
+
+// GetIdFromSession provides a mock function with given fields: _a0
+func (_m *Display) GetIdFromSession(_a0 string) (string, error) {
 	ret := _m.Called(_a0)
 
 	var r0 string
@@ -38,23 +43,23 @@ func (_m *Display) GetLoginFromSession(_a0 string) (string, error) {
 	return r0, r1
 }
 
-// NewSession provides a mock function with given fields: login
-func (_m *Display) NewSession(login string) (string, error) {
-	ret := _m.Called(login)
+// NewSession provides a mock function with given fields: id
+func (_m *Display) NewSession(id string) (string, error) {
+	ret := _m.Called(id)
 
 	var r0 string
 	var r1 error
 	if rf, ok := ret.Get(0).(func(string) (string, error)); ok {
-		return rf(login)
+		return rf(id)
 	}
 	if rf, ok := ret.Get(0).(func(string) string); ok {
-		r0 = rf(login)
+		r0 = rf(id)
 	} else {
 		r0 = ret.Get(0).(string)
 	}
 
 	if rf, ok := ret.Get(1).(func(string) error); ok {
-		r1 = rf(login)
+		r1 = rf(id)
 	} else {
 		r1 = ret.Error(1)
 	}
@@ -62,9 +67,9 @@ func (_m *Display) NewSession(login string) (string, error) {
 	return r0, r1
 }
 
-// UpdateSessionLifeTime provides a mock function with given fields: login
-func (_m *Display) UpdateSessionLifeTime(login string) {
-	_m.Called(login)
+// UpdateSessionLifeTime provides a mock function with given fields: key
+func (_m *Display) UpdateSessionLifeTime(key string) {
+	_m.Called(key)
 }
 
 // NewDisplay creates a new instance of Display. It also registers a testing interface on the mock and a cleanup function to assert the mocks expectations.

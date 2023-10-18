@@ -1,15 +1,15 @@
 package GRPC
 
 import (
+	"AccountControl/internal/config"
+	"AccountControl/internal/server/GRPC/pb"
 	"google.golang.org/grpc"
 	"net"
-	"user-authorization/internal/config"
-	"user-authorization/internal/server/GRPC/pb"
 )
 
-func StartGRPC(cfg *config.GRPCConfig, service pb.AuthorizationServer) error {
+func StartGRPC(cfg *config.GRPCConfig, service pb.AccountControlServer) error {
 	router := grpc.NewServer(grpc.EmptyServerOption{})
-	pb.RegisterAuthorizationServer(router, service)
+	pb.RegisterAccountControlServer(router, service)
 	return startListener(router, cfg)
 }
 

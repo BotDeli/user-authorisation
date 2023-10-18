@@ -1,23 +1,23 @@
 package app
 
 import (
-	"user-authorization/internal/config"
-	"user-authorization/internal/server/GRPC"
-	"user-authorization/internal/storage/postgres/user"
-	"user-authorization/internal/storage/redis/session"
-	"user-authorization/pkg/errorHandle"
+	"AccountControl/internal/config"
+	"AccountControl/internal/server/GRPC"
+	"AccountControl/internal/storage/postgres/user"
+	"AccountControl/internal/storage/redis/session"
+	"AccountControl/pkg/errorHandle"
 )
 
 func StartApp() {
 	cfg := config.MustReadConfig()
 
-	userDisplay := user.MustInitUserDisplay(cfg.Postgres)
-	defer userDisplay.Close()
+	displayU := user.MustInitUserDisplay(cfg.Postgres)
+	defer displayU.Close()
 
-	sessionDisplay := session.MustInitSessionDisplay(cfg.Redis)
-	defer sessionDisplay.Close()
+	displayS := session.MustInitSessionDisplay(cfg.Redis)
+	defer displayS.Close()
 
-	service := GRPC.InitService(userDisplay, sessionDisplay)
+	service := GRPC.InitService(displayU, displayS)
 
 	errorHandle.Fatal(
 		"internal/app",

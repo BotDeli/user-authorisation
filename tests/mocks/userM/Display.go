@@ -9,27 +9,37 @@ type Display struct {
 	mock.Mock
 }
 
-// AuthenticationUser provides a mock function with given fields: login, password
-func (_m *Display) AuthenticationUser(login string, password string) error {
-	ret := _m.Called(login, password)
+// AuthenticationUser provides a mock function with given fields: email, password
+func (_m *Display) AuthenticationUser(email string, password string) (string, error) {
+	ret := _m.Called(email, password)
 
-	var r0 error
-	if rf, ok := ret.Get(0).(func(string, string) error); ok {
-		r0 = rf(login, password)
+	var r0 string
+	var r1 error
+	if rf, ok := ret.Get(0).(func(string, string) (string, error)); ok {
+		return rf(email, password)
+	}
+	if rf, ok := ret.Get(0).(func(string, string) string); ok {
+		r0 = rf(email, password)
 	} else {
-		r0 = ret.Error(0)
+		r0 = ret.Get(0).(string)
 	}
 
-	return r0
+	if rf, ok := ret.Get(1).(func(string, string) error); ok {
+		r1 = rf(email, password)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
 }
 
-// ChangePassword provides a mock function with given fields: login, password, newPassword
-func (_m *Display) ChangePassword(login string, password string, newPassword string) error {
-	ret := _m.Called(login, password, newPassword)
+// ChangePassword provides a mock function with given fields: email, password, newPassword
+func (_m *Display) ChangePassword(email string, password string, newPassword string) error {
+	ret := _m.Called(email, password, newPassword)
 
 	var r0 error
 	if rf, ok := ret.Get(0).(func(string, string, string) error); ok {
-		r0 = rf(login, password, newPassword)
+		r0 = rf(email, password, newPassword)
 	} else {
 		r0 = ret.Error(0)
 	}
@@ -42,13 +52,27 @@ func (_m *Display) Close() {
 	_m.Called()
 }
 
-// IsUser provides a mock function with given fields: login
-func (_m *Display) IsUser(login string) bool {
-	ret := _m.Called(login)
+// DeleteUser provides a mock function with given fields: id, email, password
+func (_m *Display) DeleteUser(id string, email string, password string) error {
+	ret := _m.Called(id, email, password)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(string, string, string) error); ok {
+		r0 = rf(id, email, password)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// IsUser provides a mock function with given fields: email
+func (_m *Display) IsUser(email string) bool {
+	ret := _m.Called(email)
 
 	var r0 bool
 	if rf, ok := ret.Get(0).(func(string) bool); ok {
-		r0 = rf(login)
+		r0 = rf(email)
 	} else {
 		r0 = ret.Get(0).(bool)
 	}
@@ -56,18 +80,28 @@ func (_m *Display) IsUser(login string) bool {
 	return r0
 }
 
-// NewUser provides a mock function with given fields: login, password
-func (_m *Display) NewUser(login string, password string) error {
-	ret := _m.Called(login, password)
+// NewUser provides a mock function with given fields: email, password
+func (_m *Display) NewUser(email string, password string) (string, error) {
+	ret := _m.Called(email, password)
 
-	var r0 error
-	if rf, ok := ret.Get(0).(func(string, string) error); ok {
-		r0 = rf(login, password)
+	var r0 string
+	var r1 error
+	if rf, ok := ret.Get(0).(func(string, string) (string, error)); ok {
+		return rf(email, password)
+	}
+	if rf, ok := ret.Get(0).(func(string, string) string); ok {
+		r0 = rf(email, password)
 	} else {
-		r0 = ret.Error(0)
+		r0 = ret.Get(0).(string)
 	}
 
-	return r0
+	if rf, ok := ret.Get(1).(func(string, string) error); ok {
+		r1 = rf(email, password)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
 }
 
 // NewDisplay creates a new instance of Display. It also registers a testing interface on the mock and a cleanup function to assert the mocks expectations.

@@ -1,85 +1,106 @@
 package GRPC
 
 import (
+	"AccountControl/internal/server/GRPC/pb"
+	"AccountControl/internal/storage/postgres/user"
+	"AccountControl/internal/storage/redis/session"
 	"context"
 	"errors"
-	"user-authorization/internal/server/GRPC/pb"
-	"user-authorization/internal/storage/postgres/user"
-	"user-authorization/internal/storage/redis/session"
 )
 
-type Authorization struct {
-	user    user.Display
-	session session.Display
+type AccountControl struct {
+	displayU user.Display
+	displayS session.Display
 }
 
 var (
 	errUserAlreadyRegistered      = errors.New("пользователь уже зарегистрирован")
-	errDontCorrectLoginOrPassword = errors.New("некорректный логин или пароль")
-	errUserNotAuthenticated       = errors.New("пользователь не авторизован")
+	errDontCorrectEmailOrPassword = errors.New("некорректный логин или пароль")
+	errUserNotAuthorized          = errors.New("пользователь не авторизован")
+	errServerError                = errors.New("ошибка на сервере, попробуйте позже")
 )
 
-func InitService(user user.Display, session session.Display) pb.AuthorizationServer {
-	return &Authorization{
-		user:    user,
-		session: session,
+func InitService(displayU user.Display, displayS session.Display) pb.AccountControlServer {
+	return &AccountControl{
+		displayU: displayU,
+		displayS: displayS,
 	}
 }
 
-func (a *Authorization) Register(_ context.Context, user *pb.User) (*pb.SessionData, error) {
-	if a.user.IsUser(user.Login) {
+func (a *AccountControl) RegistrationAccount(_ context.Context, user *pb.User) (*pb.SessionData, error) {
+	if a.displayU.IsUser(user.Email) {
 		return nil, errUserAlreadyRegistered
 	}
 
-	if err := a.user.NewUser(user.Login, user.Password); err != nil {
-		return nil, err
+	id, err := a.displayU.NewUser(user.Email, user.Password)
+	if err != nil {
+		return nil, errServerError
 	}
 
-	key, err := a.session.NewSession(user.Login)
+	key, err := a.displayS.NewSession(id)
 	if err != nil {
-		return nil, err
+		return nil, errServerError
 	}
 
 	return &pb.SessionData{
+		Id:  id,
 		Key: key,
 	}, nil
 }
-func (a *Authorization) LogIn(_ context.Context, user *pb.User) (*pb.SessionData, error) {
-	if !a.user.IsUser(user.Login) {
-		return nil, errDontCorrectLoginOrPassword
+
+func (a *AccountControl) AuthorizationAccount(_ context.Context, user *pb.User) (*pb.SessionData, error) {
+	if !a.displayU.IsUser(user.Email) {
+		return nil, errDontCorrectEmailOrPassword
 	}
 
-	if err := a.user.AuthenticationUser(user.Login, user.Password); err != nil {
-		return nil, errDontCorrectLoginOrPassword
-	}
-
-	key, err := a.session.NewSession(user.Login)
+	id, err := a.displayU.AuthenticationUser(user.Email, user.Password)
 	if err != nil {
-		return nil, err
+		return nil, errDontCorrectEmailOrPassword
+	}
+
+	key, err := a.displayS.NewSession(id)
+	if err != nil {
+		return nil, errServerError
 	}
 
 	return &pb.SessionData{
+		Id:  id,
 		Key: key,
 	}, nil
 }
-func (a *Authorization) IsAuthenticated(_ context.Context, session *pb.SessionData) (*pb.AuthenticatedSession, error) {
-	login, err := a.session.GetLoginFromSession(session.Key)
+
+func (a *AccountControl) ChangePasswordAccount(_ context.Context, data *pb.ChangePasswordData) (*pb.Null, error) {
+	err := a.displayU.ChangePassword(data.Email, data.Password, data.NewPassword)
 	if err != nil {
-		return nil, errUserNotAuthenticated
+		return nil, errUserNotAuthorized
 	}
 
-	a.session.UpdateSessionLifeTime(login)
+	return &pb.Null{}, nil
+}
 
-	return &pb.AuthenticatedSession{
-		Login: login,
+func (a *AccountControl) DeleteAccount(_ context.Context, info *pb.FullInfoUser) (*pb.Null, error) {
+	err := a.displayU.DeleteUser(info.Id, info.Email, info.Password)
+	if err != nil {
+		return nil, errUserNotAuthorized
+	}
+
+	return &pb.Null{}, nil
+}
+
+func (a *AccountControl) IsAuthorizedSessionData(_ context.Context, session *pb.SessionData) (*pb.AccountID, error) {
+	id, err := a.displayS.GetIdFromSession(session.Key)
+	if err != nil {
+		return nil, errUserNotAuthorized
+	}
+
+	a.displayS.UpdateSessionLifeTime(id)
+
+	return &pb.AccountID{
+		Id: id,
 	}, nil
 }
 
-func (a *Authorization) ChangePassword(_ context.Context, data *pb.ChangePasswordData) (*pb.Null, error) {
-	err := a.user.ChangePassword(data.Login, data.Password, data.NewPassword)
-	if err != nil {
-		return nil, err
-	}
-
+func (a *AccountControl) DeleteSessionData(_ context.Context, session *pb.SessionData) (*pb.Null, error) {
+	a.displayS.DeleteSession(session.Key)
 	return &pb.Null{}, nil
 }
