@@ -39,7 +39,8 @@ func initTable(db *sql.DB) {
 		CREATE TABLE IF NOT EXISTS users (
     	id VARCHAR NOT NULL PRIMARY KEY UNIQUE,
 		email VARCHAR NOT NULL UNIQUE,
-		password VARCHAR NOT NULL
+		password VARCHAR NOT NULL,
+		verified_email BOOLEAN NOT NULL
 	)`); err != nil {
 		log.Printf("Error creating tables: %s\n", err)
 	}
@@ -114,7 +115,7 @@ func scanFirstOneValueFromRows[T any](rows *sql.Rows) (T, error) {
 }
 
 func insertNewUser(pg *Postgres, id, email, hash string) error {
-	query := `INSERT INTO users (id, email, password) VALUES($1, $2, $3)`
+	query := `INSERT INTO users (id, email, password, verified_email) VALUES($1, $2, $3, false)`
 	_, err := pg.DB.Exec(query, id, email, hash)
 	return err
 }
@@ -185,6 +186,7 @@ func (pg *Postgres) DeleteUser(id, email, password string) error {
 	if id != verifyID {
 		return errDontCorrectData
 	}
+
 	return dropUserData(pg, id, email)
 }
 
@@ -192,4 +194,19 @@ func dropUserData(pg *Postgres, id, email string) error {
 	query := `DELETE FROM users WHERE id = $1 AND email = $2`
 	_, err := pg.DB.Exec(query, id, email)
 	return err
+}
+
+func (pg *Postgres) IsVerifiedEmail(email string) (bool, error) {
+	query := `SELECT verified_email FROM users WHERE email = $1`
+	rows, err := pg.DB.Query(query, email)
+	if err != nil {
+		return false, err
+	}
+	return scanFirstOneValueFromRows[bool](rows)
+}
+
+func (pg *Postgres) VerifyEmail(email string) (bool, error) {
+	query := `UPDATE users SET verified_email = true WHERE email = $1`
+	_, err := pg.DB.Exec(query, email)
+	return err == nil, err
 }

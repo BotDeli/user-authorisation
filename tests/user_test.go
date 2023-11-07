@@ -319,3 +319,81 @@ func TestSuccessfulDeleteUser(t *testing.T) {
 
 	testPostgresMock(t, initMocks, testMocks)
 }
+
+func TestErrorIsVerifiedEmail(t *testing.T) {
+	initMocks := func(mock sqlmock.Sqlmock) {
+		mock.ExpectQuery(`SELECT verified_email`).WithArgs(email).WillReturnError(testError)
+	}
+
+	testMocks := func(t *testing.T, pg user.Postgres) {
+		is, err := pg.IsVerifiedEmail(email)
+		isFalse(t, is)
+		errorIsTestError(t, err)
+	}
+
+	testPostgresMock(t, initMocks, testMocks)
+}
+
+func TestSuccessfulFalseIsVerifiedEmail(t *testing.T) {
+	initMocks := func(mock sqlmock.Sqlmock) {
+		rows := getRowsVerifiedEmail(false)
+		mock.ExpectQuery(`SELECT verified_email`).WithArgs(email).WillReturnRows(rows)
+	}
+
+	testMocks := func(t *testing.T, pg user.Postgres) {
+		is, err := pg.IsVerifiedEmail(email)
+		isFalse(t, is)
+		errorIsNil(t, err)
+	}
+
+	testPostgresMock(t, initMocks, testMocks)
+}
+
+func getRowsVerifiedEmail(response bool) *sqlmock.Rows {
+	rows := sqlmock.NewRows([]string{"verified_email"})
+	rows.AddRow(response)
+	return rows
+}
+
+func TestSuccessfulTrueIsVerifiedEmail(t *testing.T) {
+	initMocks := func(mock sqlmock.Sqlmock) {
+		rows := getRowsVerifiedEmail(true)
+		mock.ExpectQuery(`SELECT verified_email`).WithArgs(email).WillReturnRows(rows)
+	}
+
+	testMocks := func(t *testing.T, pg user.Postgres) {
+		is, err := pg.IsVerifiedEmail(email)
+		isTrue(t, is)
+		errorIsNil(t, err)
+	}
+
+	testPostgresMock(t, initMocks, testMocks)
+}
+
+func TestErrorVerifyEmail(t *testing.T) {
+	initMocks := func(mock sqlmock.Sqlmock) {
+		mock.ExpectExec(`UPDATE`).WithArgs(email).WillReturnError(testError)
+	}
+
+	testMocks := func(t *testing.T, pg user.Postgres) {
+		is, err := pg.VerifyEmail(email)
+		isFalse(t, is)
+		errorIsTestError(t, err)
+	}
+
+	testPostgresMock(t, initMocks, testMocks)
+}
+
+func TestSuccessfulVerifyEmail(t *testing.T) {
+	initMocks := func(mock sqlmock.Sqlmock) {
+		mock.ExpectExec(`UPDATE`).WithArgs(email).WillReturnResult(emptyResult)
+	}
+
+	testMocks := func(t *testing.T, pg user.Postgres) {
+		is, err := pg.VerifyEmail(email)
+		isTrue(t, is)
+		errorIsNil(t, err)
+	}
+
+	testPostgresMock(t, initMocks, testMocks)
+}

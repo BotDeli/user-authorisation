@@ -80,6 +80,30 @@ func (_m *Display) IsUser(email string) bool {
 	return r0
 }
 
+// IsVerifiedEmail provides a mock function with given fields: email
+func (_m *Display) IsVerifiedEmail(email string) (bool, error) {
+	ret := _m.Called(email)
+
+	var r0 bool
+	var r1 error
+	if rf, ok := ret.Get(0).(func(string) (bool, error)); ok {
+		return rf(email)
+	}
+	if rf, ok := ret.Get(0).(func(string) bool); ok {
+		r0 = rf(email)
+	} else {
+		r0 = ret.Get(0).(bool)
+	}
+
+	if rf, ok := ret.Get(1).(func(string) error); ok {
+		r1 = rf(email)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // NewUser provides a mock function with given fields: email, password
 func (_m *Display) NewUser(email string, password string) (string, error) {
 	ret := _m.Called(email, password)
@@ -97,6 +121,30 @@ func (_m *Display) NewUser(email string, password string) (string, error) {
 
 	if rf, ok := ret.Get(1).(func(string, string) error); ok {
 		r1 = rf(email, password)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// VerifyEmail provides a mock function with given fields: email
+func (_m *Display) VerifyEmail(email string) (bool, error) {
+	ret := _m.Called(email)
+
+	var r0 bool
+	var r1 error
+	if rf, ok := ret.Get(0).(func(string) (bool, error)); ok {
+		return rf(email)
+	}
+	if rf, ok := ret.Get(0).(func(string) bool); ok {
+		r0 = rf(email)
+	} else {
+		r0 = ret.Get(0).(bool)
+	}
+
+	if rf, ok := ret.Get(1).(func(string) error); ok {
+		r1 = rf(email)
 	} else {
 		r1 = ret.Error(1)
 	}

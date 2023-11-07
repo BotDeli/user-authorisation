@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.31.0
 // 	protoc        v4.24.3
-// source: AccountControl.proto
+// source: internal/server/GRPC/pb/AccountControl.proto
 
 package pb
 
@@ -32,7 +32,7 @@ type User struct {
 func (x *User) Reset() {
 	*x = User{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_AccountControl_proto_msgTypes[0]
+		mi := &file_internal_server_GRPC_pb_AccountControl_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -45,7 +45,7 @@ func (x *User) String() string {
 func (*User) ProtoMessage() {}
 
 func (x *User) ProtoReflect() protoreflect.Message {
-	mi := &file_AccountControl_proto_msgTypes[0]
+	mi := &file_internal_server_GRPC_pb_AccountControl_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -58,7 +58,7 @@ func (x *User) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use User.ProtoReflect.Descriptor instead.
 func (*User) Descriptor() ([]byte, []int) {
-	return file_AccountControl_proto_rawDescGZIP(), []int{0}
+	return file_internal_server_GRPC_pb_AccountControl_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *User) GetEmail() string {
@@ -87,7 +87,7 @@ type SessionData struct {
 func (x *SessionData) Reset() {
 	*x = SessionData{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_AccountControl_proto_msgTypes[1]
+		mi := &file_internal_server_GRPC_pb_AccountControl_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -100,7 +100,7 @@ func (x *SessionData) String() string {
 func (*SessionData) ProtoMessage() {}
 
 func (x *SessionData) ProtoReflect() protoreflect.Message {
-	mi := &file_AccountControl_proto_msgTypes[1]
+	mi := &file_internal_server_GRPC_pb_AccountControl_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -113,7 +113,7 @@ func (x *SessionData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SessionData.ProtoReflect.Descriptor instead.
 func (*SessionData) Descriptor() ([]byte, []int) {
-	return file_AccountControl_proto_rawDescGZIP(), []int{1}
+	return file_internal_server_GRPC_pb_AccountControl_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *SessionData) GetId() string {
@@ -143,7 +143,7 @@ type ChangePasswordData struct {
 func (x *ChangePasswordData) Reset() {
 	*x = ChangePasswordData{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_AccountControl_proto_msgTypes[2]
+		mi := &file_internal_server_GRPC_pb_AccountControl_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -156,7 +156,7 @@ func (x *ChangePasswordData) String() string {
 func (*ChangePasswordData) ProtoMessage() {}
 
 func (x *ChangePasswordData) ProtoReflect() protoreflect.Message {
-	mi := &file_AccountControl_proto_msgTypes[2]
+	mi := &file_internal_server_GRPC_pb_AccountControl_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -169,7 +169,7 @@ func (x *ChangePasswordData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChangePasswordData.ProtoReflect.Descriptor instead.
 func (*ChangePasswordData) Descriptor() ([]byte, []int) {
-	return file_AccountControl_proto_rawDescGZIP(), []int{2}
+	return file_internal_server_GRPC_pb_AccountControl_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *ChangePasswordData) GetEmail() string {
@@ -206,7 +206,7 @@ type FullInfoUser struct {
 func (x *FullInfoUser) Reset() {
 	*x = FullInfoUser{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_AccountControl_proto_msgTypes[3]
+		mi := &file_internal_server_GRPC_pb_AccountControl_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -219,7 +219,7 @@ func (x *FullInfoUser) String() string {
 func (*FullInfoUser) ProtoMessage() {}
 
 func (x *FullInfoUser) ProtoReflect() protoreflect.Message {
-	mi := &file_AccountControl_proto_msgTypes[3]
+	mi := &file_internal_server_GRPC_pb_AccountControl_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -232,7 +232,7 @@ func (x *FullInfoUser) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FullInfoUser.ProtoReflect.Descriptor instead.
 func (*FullInfoUser) Descriptor() ([]byte, []int) {
-	return file_AccountControl_proto_rawDescGZIP(), []int{3}
+	return file_internal_server_GRPC_pb_AccountControl_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *FullInfoUser) GetId() string {
@@ -267,7 +267,7 @@ type AccountID struct {
 func (x *AccountID) Reset() {
 	*x = AccountID{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_AccountControl_proto_msgTypes[4]
+		mi := &file_internal_server_GRPC_pb_AccountControl_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -280,7 +280,7 @@ func (x *AccountID) String() string {
 func (*AccountID) ProtoMessage() {}
 
 func (x *AccountID) ProtoReflect() protoreflect.Message {
-	mi := &file_AccountControl_proto_msgTypes[4]
+	mi := &file_internal_server_GRPC_pb_AccountControl_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -293,7 +293,7 @@ func (x *AccountID) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AccountID.ProtoReflect.Descriptor instead.
 func (*AccountID) Descriptor() ([]byte, []int) {
-	return file_AccountControl_proto_rawDescGZIP(), []int{4}
+	return file_internal_server_GRPC_pb_AccountControl_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *AccountID) GetId() string {
@@ -312,7 +312,7 @@ type Null struct {
 func (x *Null) Reset() {
 	*x = Null{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_AccountControl_proto_msgTypes[5]
+		mi := &file_internal_server_GRPC_pb_AccountControl_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -325,7 +325,7 @@ func (x *Null) String() string {
 func (*Null) ProtoMessage() {}
 
 func (x *Null) ProtoReflect() protoreflect.Message {
-	mi := &file_AccountControl_proto_msgTypes[5]
+	mi := &file_internal_server_GRPC_pb_AccountControl_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -338,35 +338,136 @@ func (x *Null) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Null.ProtoReflect.Descriptor instead.
 func (*Null) Descriptor() ([]byte, []int) {
-	return file_AccountControl_proto_rawDescGZIP(), []int{5}
+	return file_internal_server_GRPC_pb_AccountControl_proto_rawDescGZIP(), []int{5}
 }
 
-var File_AccountControl_proto protoreflect.FileDescriptor
+type EmailData struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
 
-var file_AccountControl_proto_rawDesc = []byte{
-	0x0a, 0x14, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c,
-	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x38, 0x0a, 0x04, 0x55, 0x73, 0x65, 0x72, 0x12, 0x14,
-	0x0a, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65,
-	0x6d, 0x61, 0x69, 0x6c, 0x12, 0x1a, 0x0a, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64,
-	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64,
-	0x22, 0x2f, 0x0a, 0x0b, 0x53, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x44, 0x61, 0x74, 0x61, 0x12,
-	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12,
-	0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65,
-	0x79, 0x22, 0x68, 0x0a, 0x12, 0x43, 0x68, 0x61, 0x6e, 0x67, 0x65, 0x50, 0x61, 0x73, 0x73, 0x77,
-	0x6f, 0x72, 0x64, 0x44, 0x61, 0x74, 0x61, 0x12, 0x14, 0x0a, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x1a, 0x0a,
-	0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x12, 0x20, 0x0a, 0x0b, 0x6e, 0x65, 0x77,
-	0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b,
-	0x6e, 0x65, 0x77, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x22, 0x50, 0x0a, 0x0c, 0x46,
-	0x75, 0x6c, 0x6c, 0x49, 0x6e, 0x66, 0x6f, 0x55, 0x73, 0x65, 0x72, 0x12, 0x0e, 0x0a, 0x02, 0x69,
-	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x65,
-	0x6d, 0x61, 0x69, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65, 0x6d, 0x61, 0x69,
-	0x6c, 0x12, 0x1a, 0x0a, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x03, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x22, 0x1b, 0x0a,
-	0x09, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x44, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x06, 0x0a, 0x04, 0x4e, 0x75,
-	0x6c, 0x6c, 0x32, 0xb0, 0x02, 0x0a, 0x0e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x43, 0x6f,
+	Email string `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
+}
+
+func (x *EmailData) Reset() {
+	*x = EmailData{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_internal_server_GRPC_pb_AccountControl_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *EmailData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EmailData) ProtoMessage() {}
+
+func (x *EmailData) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_server_GRPC_pb_AccountControl_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EmailData.ProtoReflect.Descriptor instead.
+func (*EmailData) Descriptor() ([]byte, []int) {
+	return file_internal_server_GRPC_pb_AccountControl_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *EmailData) GetEmail() string {
+	if x != nil {
+		return x.Email
+	}
+	return ""
+}
+
+type VerifiedEmailData struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	IsVerified bool `protobuf:"varint,1,opt,name=isVerified,proto3" json:"isVerified,omitempty"`
+}
+
+func (x *VerifiedEmailData) Reset() {
+	*x = VerifiedEmailData{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_internal_server_GRPC_pb_AccountControl_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *VerifiedEmailData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VerifiedEmailData) ProtoMessage() {}
+
+func (x *VerifiedEmailData) ProtoReflect() protoreflect.Message {
+	mi := &file_internal_server_GRPC_pb_AccountControl_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VerifiedEmailData.ProtoReflect.Descriptor instead.
+func (*VerifiedEmailData) Descriptor() ([]byte, []int) {
+	return file_internal_server_GRPC_pb_AccountControl_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *VerifiedEmailData) GetIsVerified() bool {
+	if x != nil {
+		return x.IsVerified
+	}
+	return false
+}
+
+var File_internal_server_GRPC_pb_AccountControl_proto protoreflect.FileDescriptor
+
+var file_internal_server_GRPC_pb_AccountControl_proto_rawDesc = []byte{
+	0x0a, 0x2c, 0x69, 0x6e, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c, 0x2f, 0x73, 0x65, 0x72, 0x76, 0x65,
+	0x72, 0x2f, 0x47, 0x52, 0x50, 0x43, 0x2f, 0x70, 0x62, 0x2f, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e,
+	0x74, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x38,
+	0x0a, 0x04, 0x55, 0x73, 0x65, 0x72, 0x12, 0x14, 0x0a, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x1a, 0x0a, 0x08,
+	0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08,
+	0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x22, 0x2f, 0x0a, 0x0b, 0x53, 0x65, 0x73, 0x73,
+	0x69, 0x6f, 0x6e, 0x44, 0x61, 0x74, 0x61, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x22, 0x68, 0x0a, 0x12, 0x43, 0x68, 0x61,
+	0x6e, 0x67, 0x65, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x44, 0x61, 0x74, 0x61, 0x12,
+	0x14, 0x0a, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05,
+	0x65, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x1a, 0x0a, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72,
+	0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72,
+	0x64, 0x12, 0x20, 0x0a, 0x0b, 0x6e, 0x65, 0x77, 0x50, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x6e, 0x65, 0x77, 0x50, 0x61, 0x73, 0x73, 0x77,
+	0x6f, 0x72, 0x64, 0x22, 0x50, 0x0a, 0x0c, 0x46, 0x75, 0x6c, 0x6c, 0x49, 0x6e, 0x66, 0x6f, 0x55,
+	0x73, 0x65, 0x72, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x02, 0x69, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x1a, 0x0a, 0x08, 0x70, 0x61, 0x73,
+	0x73, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x70, 0x61, 0x73,
+	0x73, 0x77, 0x6f, 0x72, 0x64, 0x22, 0x1b, 0x0a, 0x09, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74,
+	0x49, 0x44, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02,
+	0x69, 0x64, 0x22, 0x06, 0x0a, 0x04, 0x4e, 0x75, 0x6c, 0x6c, 0x22, 0x21, 0x0a, 0x09, 0x45, 0x6d,
+	0x61, 0x69, 0x6c, 0x44, 0x61, 0x74, 0x61, 0x12, 0x14, 0x0a, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x22, 0x33, 0x0a,
+	0x11, 0x56, 0x65, 0x72, 0x69, 0x66, 0x69, 0x65, 0x64, 0x45, 0x6d, 0x61, 0x69, 0x6c, 0x44, 0x61,
+	0x74, 0x61, 0x12, 0x1e, 0x0a, 0x0a, 0x69, 0x73, 0x56, 0x65, 0x72, 0x69, 0x66, 0x69, 0x65, 0x64,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0a, 0x69, 0x73, 0x56, 0x65, 0x72, 0x69, 0x66, 0x69,
+	0x65, 0x64, 0x32, 0x96, 0x03, 0x0a, 0x0e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x43, 0x6f,
 	0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x12, 0x2c, 0x0a, 0x13, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72,
 	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x05, 0x2e, 0x55,
 	0x73, 0x65, 0x72, 0x1a, 0x0c, 0x2e, 0x53, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x44, 0x61, 0x74,
@@ -385,58 +486,70 @@ var file_AccountControl_proto_rawDesc = []byte{
 	0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x44, 0x22, 0x00, 0x12, 0x2a, 0x0a, 0x11, 0x44, 0x65, 0x6c,
 	0x65, 0x74, 0x65, 0x53, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x44, 0x61, 0x74, 0x61, 0x12, 0x0c,
 	0x2e, 0x53, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x44, 0x61, 0x74, 0x61, 0x1a, 0x05, 0x2e, 0x4e,
-	0x75, 0x6c, 0x6c, 0x22, 0x00, 0x42, 0x03, 0x5a, 0x01, 0x2e, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x75, 0x6c, 0x6c, 0x22, 0x00, 0x12, 0x33, 0x0a, 0x0f, 0x49, 0x73, 0x56, 0x65, 0x72, 0x69, 0x66,
+	0x69, 0x65, 0x64, 0x45, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x0a, 0x2e, 0x45, 0x6d, 0x61, 0x69, 0x6c,
+	0x44, 0x61, 0x74, 0x61, 0x1a, 0x12, 0x2e, 0x56, 0x65, 0x72, 0x69, 0x66, 0x69, 0x65, 0x64, 0x45,
+	0x6d, 0x61, 0x69, 0x6c, 0x44, 0x61, 0x74, 0x61, 0x22, 0x00, 0x12, 0x2f, 0x0a, 0x0b, 0x56, 0x65,
+	0x72, 0x69, 0x66, 0x79, 0x45, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x0a, 0x2e, 0x45, 0x6d, 0x61, 0x69,
+	0x6c, 0x44, 0x61, 0x74, 0x61, 0x1a, 0x12, 0x2e, 0x56, 0x65, 0x72, 0x69, 0x66, 0x69, 0x65, 0x64,
+	0x45, 0x6d, 0x61, 0x69, 0x6c, 0x44, 0x61, 0x74, 0x61, 0x22, 0x00, 0x42, 0x03, 0x5a, 0x01, 0x2e,
+	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
-	file_AccountControl_proto_rawDescOnce sync.Once
-	file_AccountControl_proto_rawDescData = file_AccountControl_proto_rawDesc
+	file_internal_server_GRPC_pb_AccountControl_proto_rawDescOnce sync.Once
+	file_internal_server_GRPC_pb_AccountControl_proto_rawDescData = file_internal_server_GRPC_pb_AccountControl_proto_rawDesc
 )
 
-func file_AccountControl_proto_rawDescGZIP() []byte {
-	file_AccountControl_proto_rawDescOnce.Do(func() {
-		file_AccountControl_proto_rawDescData = protoimpl.X.CompressGZIP(file_AccountControl_proto_rawDescData)
+func file_internal_server_GRPC_pb_AccountControl_proto_rawDescGZIP() []byte {
+	file_internal_server_GRPC_pb_AccountControl_proto_rawDescOnce.Do(func() {
+		file_internal_server_GRPC_pb_AccountControl_proto_rawDescData = protoimpl.X.CompressGZIP(file_internal_server_GRPC_pb_AccountControl_proto_rawDescData)
 	})
-	return file_AccountControl_proto_rawDescData
+	return file_internal_server_GRPC_pb_AccountControl_proto_rawDescData
 }
 
-var file_AccountControl_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
-var file_AccountControl_proto_goTypes = []interface{}{
+var file_internal_server_GRPC_pb_AccountControl_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_internal_server_GRPC_pb_AccountControl_proto_goTypes = []interface{}{
 	(*User)(nil),               // 0: User
 	(*SessionData)(nil),        // 1: SessionData
 	(*ChangePasswordData)(nil), // 2: ChangePasswordData
 	(*FullInfoUser)(nil),       // 3: FullInfoUser
 	(*AccountID)(nil),          // 4: AccountID
 	(*Null)(nil),               // 5: Null
+	(*EmailData)(nil),          // 6: EmailData
+	(*VerifiedEmailData)(nil),  // 7: VerifiedEmailData
 }
-var file_AccountControl_proto_depIdxs = []int32{
+var file_internal_server_GRPC_pb_AccountControl_proto_depIdxs = []int32{
 	0, // 0: AccountControl.RegistrationAccount:input_type -> User
 	0, // 1: AccountControl.AuthorizationAccount:input_type -> User
 	2, // 2: AccountControl.ChangePasswordAccount:input_type -> ChangePasswordData
 	3, // 3: AccountControl.DeleteAccount:input_type -> FullInfoUser
 	1, // 4: AccountControl.IsAuthorizedSessionData:input_type -> SessionData
 	1, // 5: AccountControl.DeleteSessionData:input_type -> SessionData
-	1, // 6: AccountControl.RegistrationAccount:output_type -> SessionData
-	1, // 7: AccountControl.AuthorizationAccount:output_type -> SessionData
-	5, // 8: AccountControl.ChangePasswordAccount:output_type -> Null
-	5, // 9: AccountControl.DeleteAccount:output_type -> Null
-	4, // 10: AccountControl.IsAuthorizedSessionData:output_type -> AccountID
-	5, // 11: AccountControl.DeleteSessionData:output_type -> Null
-	6, // [6:12] is the sub-list for method output_type
-	0, // [0:6] is the sub-list for method input_type
+	6, // 6: AccountControl.IsVerifiedEmail:input_type -> EmailData
+	6, // 7: AccountControl.VerifyEmail:input_type -> EmailData
+	1, // 8: AccountControl.RegistrationAccount:output_type -> SessionData
+	1, // 9: AccountControl.AuthorizationAccount:output_type -> SessionData
+	5, // 10: AccountControl.ChangePasswordAccount:output_type -> Null
+	5, // 11: AccountControl.DeleteAccount:output_type -> Null
+	4, // 12: AccountControl.IsAuthorizedSessionData:output_type -> AccountID
+	5, // 13: AccountControl.DeleteSessionData:output_type -> Null
+	7, // 14: AccountControl.IsVerifiedEmail:output_type -> VerifiedEmailData
+	7, // 15: AccountControl.VerifyEmail:output_type -> VerifiedEmailData
+	8, // [8:16] is the sub-list for method output_type
+	0, // [0:8] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_AccountControl_proto_init() }
-func file_AccountControl_proto_init() {
-	if File_AccountControl_proto != nil {
+func init() { file_internal_server_GRPC_pb_AccountControl_proto_init() }
+func file_internal_server_GRPC_pb_AccountControl_proto_init() {
+	if File_internal_server_GRPC_pb_AccountControl_proto != nil {
 		return
 	}
 	if !protoimpl.UnsafeEnabled {
-		file_AccountControl_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+		file_internal_server_GRPC_pb_AccountControl_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*User); i {
 			case 0:
 				return &v.state
@@ -448,7 +561,7 @@ func file_AccountControl_proto_init() {
 				return nil
 			}
 		}
-		file_AccountControl_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+		file_internal_server_GRPC_pb_AccountControl_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SessionData); i {
 			case 0:
 				return &v.state
@@ -460,7 +573,7 @@ func file_AccountControl_proto_init() {
 				return nil
 			}
 		}
-		file_AccountControl_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+		file_internal_server_GRPC_pb_AccountControl_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ChangePasswordData); i {
 			case 0:
 				return &v.state
@@ -472,7 +585,7 @@ func file_AccountControl_proto_init() {
 				return nil
 			}
 		}
-		file_AccountControl_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+		file_internal_server_GRPC_pb_AccountControl_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*FullInfoUser); i {
 			case 0:
 				return &v.state
@@ -484,7 +597,7 @@ func file_AccountControl_proto_init() {
 				return nil
 			}
 		}
-		file_AccountControl_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+		file_internal_server_GRPC_pb_AccountControl_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AccountID); i {
 			case 0:
 				return &v.state
@@ -496,8 +609,32 @@ func file_AccountControl_proto_init() {
 				return nil
 			}
 		}
-		file_AccountControl_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+		file_internal_server_GRPC_pb_AccountControl_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Null); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_internal_server_GRPC_pb_AccountControl_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*EmailData); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_internal_server_GRPC_pb_AccountControl_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*VerifiedEmailData); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -513,18 +650,18 @@ func file_AccountControl_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_AccountControl_proto_rawDesc,
+			RawDescriptor: file_internal_server_GRPC_pb_AccountControl_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_AccountControl_proto_goTypes,
-		DependencyIndexes: file_AccountControl_proto_depIdxs,
-		MessageInfos:      file_AccountControl_proto_msgTypes,
+		GoTypes:           file_internal_server_GRPC_pb_AccountControl_proto_goTypes,
+		DependencyIndexes: file_internal_server_GRPC_pb_AccountControl_proto_depIdxs,
+		MessageInfos:      file_internal_server_GRPC_pb_AccountControl_proto_msgTypes,
 	}.Build()
-	File_AccountControl_proto = out.File
-	file_AccountControl_proto_rawDesc = nil
-	file_AccountControl_proto_goTypes = nil
-	file_AccountControl_proto_depIdxs = nil
+	File_internal_server_GRPC_pb_AccountControl_proto = out.File
+	file_internal_server_GRPC_pb_AccountControl_proto_rawDesc = nil
+	file_internal_server_GRPC_pb_AccountControl_proto_goTypes = nil
+	file_internal_server_GRPC_pb_AccountControl_proto_depIdxs = nil
 }

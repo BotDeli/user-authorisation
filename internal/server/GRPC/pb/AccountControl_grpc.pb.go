@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v4.24.3
-// source: AccountControl.proto
+// source: internal/server/GRPC/pb/AccountControl.proto
 
 package pb
 
@@ -25,6 +25,8 @@ const (
 	AccountControl_DeleteAccount_FullMethodName           = "/AccountControl/DeleteAccount"
 	AccountControl_IsAuthorizedSessionData_FullMethodName = "/AccountControl/IsAuthorizedSessionData"
 	AccountControl_DeleteSessionData_FullMethodName       = "/AccountControl/DeleteSessionData"
+	AccountControl_IsVerifiedEmail_FullMethodName         = "/AccountControl/IsVerifiedEmail"
+	AccountControl_VerifyEmail_FullMethodName             = "/AccountControl/VerifyEmail"
 )
 
 // AccountControlClient is the client API for AccountControl service.
@@ -37,6 +39,8 @@ type AccountControlClient interface {
 	DeleteAccount(ctx context.Context, in *FullInfoUser, opts ...grpc.CallOption) (*Null, error)
 	IsAuthorizedSessionData(ctx context.Context, in *SessionData, opts ...grpc.CallOption) (*AccountID, error)
 	DeleteSessionData(ctx context.Context, in *SessionData, opts ...grpc.CallOption) (*Null, error)
+	IsVerifiedEmail(ctx context.Context, in *EmailData, opts ...grpc.CallOption) (*VerifiedEmailData, error)
+	VerifyEmail(ctx context.Context, in *EmailData, opts ...grpc.CallOption) (*VerifiedEmailData, error)
 }
 
 type accountControlClient struct {
@@ -101,6 +105,24 @@ func (c *accountControlClient) DeleteSessionData(ctx context.Context, in *Sessio
 	return out, nil
 }
 
+func (c *accountControlClient) IsVerifiedEmail(ctx context.Context, in *EmailData, opts ...grpc.CallOption) (*VerifiedEmailData, error) {
+	out := new(VerifiedEmailData)
+	err := c.cc.Invoke(ctx, AccountControl_IsVerifiedEmail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *accountControlClient) VerifyEmail(ctx context.Context, in *EmailData, opts ...grpc.CallOption) (*VerifiedEmailData, error) {
+	out := new(VerifiedEmailData)
+	err := c.cc.Invoke(ctx, AccountControl_VerifyEmail_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AccountControlServer is the server API for AccountControl service.
 // All implementations must embed UnimplementedAccountControlServer
 // for forward compatibility
@@ -111,6 +133,8 @@ type AccountControlServer interface {
 	DeleteAccount(context.Context, *FullInfoUser) (*Null, error)
 	IsAuthorizedSessionData(context.Context, *SessionData) (*AccountID, error)
 	DeleteSessionData(context.Context, *SessionData) (*Null, error)
+	IsVerifiedEmail(context.Context, *EmailData) (*VerifiedEmailData, error)
+	VerifyEmail(context.Context, *EmailData) (*VerifiedEmailData, error)
 }
 
 // UnimplementedAccountControlServer must be embedded to have forward compatible implementations.
@@ -135,6 +159,13 @@ func (UnimplementedAccountControlServer) IsAuthorizedSessionData(context.Context
 func (UnimplementedAccountControlServer) DeleteSessionData(context.Context, *SessionData) (*Null, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteSessionData not implemented")
 }
+func (UnimplementedAccountControlServer) IsVerifiedEmail(context.Context, *EmailData) (*VerifiedEmailData, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method IsVerifiedEmail not implemented")
+}
+func (UnimplementedAccountControlServer) VerifyEmail(context.Context, *EmailData) (*VerifiedEmailData, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method VerifyEmail not implemented")
+}
+func (UnimplementedAccountControlServer) mustEmbedUnimplementedAccountControlServer() {}
 
 // UnsafeAccountControlServer may be embedded to opt out of forward compatibility for this service.
 // Use of this interface is not recommended, as added methods to AccountControlServer will
@@ -255,6 +286,42 @@ func _AccountControl_DeleteSessionData_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AccountControl_IsVerifiedEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmailData)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountControlServer).IsVerifiedEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountControl_IsVerifiedEmail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountControlServer).IsVerifiedEmail(ctx, req.(*EmailData))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AccountControl_VerifyEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EmailData)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AccountControlServer).VerifyEmail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AccountControl_VerifyEmail_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AccountControlServer).VerifyEmail(ctx, req.(*EmailData))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AccountControl_ServiceDesc is the grpc.ServiceDesc for AccountControl service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -286,7 +353,15 @@ var AccountControl_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "DeleteSessionData",
 			Handler:    _AccountControl_DeleteSessionData_Handler,
 		},
+		{
+			MethodName: "IsVerifiedEmail",
+			Handler:    _AccountControl_IsVerifiedEmail_Handler,
+		},
+		{
+			MethodName: "VerifyEmail",
+			Handler:    _AccountControl_VerifyEmail_Handler,
+		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "AccountControl.proto",
+	Metadata: "internal/server/GRPC/pb/AccountControl.proto",
 }

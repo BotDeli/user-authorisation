@@ -104,3 +104,23 @@ func (a *AccountControl) DeleteSessionData(_ context.Context, session *pb.Sessio
 	a.displayS.DeleteSession(session.Key)
 	return &pb.Null{}, nil
 }
+
+func (a *AccountControl) IsVerifiedEmail(_ context.Context, emailData *pb.EmailData) (*pb.VerifiedEmailData, error) {
+	is, err := a.displayU.IsVerifiedEmail(emailData.Email)
+	if err != nil {
+		return nil, errUserNotAuthorized
+	}
+	return &pb.VerifiedEmailData{
+		IsVerified: is,
+	}, nil
+}
+
+func (a *AccountControl) VerifyEmail(_ context.Context, emailData *pb.EmailData) (*pb.VerifiedEmailData, error) {
+	is, err := a.displayU.VerifyEmail(emailData.Email)
+	if err != nil {
+		return nil, errUserNotAuthorized
+	}
+	return &pb.VerifiedEmailData{
+		IsVerified: is,
+	}, nil
+}

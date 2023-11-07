@@ -10,6 +10,9 @@ service AccountControl {
 
   rpc IsAuthorizedSessionData(SessionData) returns(AccountID) {}
   rpc DeleteSessionData(SessionData) returns(Null) {}
+
+  rpc IsVerifiedEmail(EmailData) returns(VerifiedEmailData) {}
+  rpc VerifyEmail(EmailData) returns(VerifiedEmailData) {}
 }
 
 message User {
@@ -39,3 +42,11 @@ message AccountID {
 }
 
 message Null {}
+
+message EmailData {
+  string email = 1;
+}
+
+message VerifiedEmailData {
+  bool isVerified = 1;
+}

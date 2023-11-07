@@ -13,6 +13,8 @@ type Display interface {
 	AuthenticationUser(email, password string) (string, error)
 	ChangePassword(email, password, newPassword string) error
 	DeleteUser(id, email, password string) error
+	IsVerifiedEmail(email string) (bool, error)
+	VerifyEmail(email string) (bool, error)
 }
 
 const path = "internal/storage/postgres/user"
